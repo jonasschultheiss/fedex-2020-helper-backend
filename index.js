@@ -31,6 +31,15 @@ const db = [
   },
 ];
 
+const temperature = [
+  { warm: 766, cold: 1024 }, // 2700
+  { warm: 762, cold: 1144 }, // 3000
+  { warm: 722, cold: 1214 }, // 3500
+  { warm: 692, cold: 1244 }, // 4000
+  { warm: 1214, cold: 692 }, // 5000
+  { warm: 512, cold: 1278 }, // 6500
+];
+
 const jsonParser = bodyparser.json();
 app.use(jsonParser);
 
@@ -57,8 +66,42 @@ app.put("/lamps/:iNumber", async (req, res) => {
       (lamp) => lamp.iNumber === req.params.iNumber
     );
 
+    let temperatureIndex = 0;
+    if (
+      changedLamp[0].temperature <= 2700 &&
+      changedLamp[0].temperature < 3000
+    ) {
+      temperatureIndex = 0;
+    } else if (
+      changedLamp[0].temperature <= 3000 &&
+      changedLamp[0].temperature < 3500
+    ) {
+      temperatureIndex = 1;
+    } else if (
+      changedLamp[0].temperature <= 3500 &&
+      changedLamp[0].temperature < 4000
+    ) {
+      temperatureIndex = 2;
+    } else if (
+      changedLamp[0].temperature <= 4000 &&
+      changedLamp[0].temperature < 5000
+    ) {
+      temperatureIndex = 3;
+    } else if (
+      changedLamp[0].temperature <= 5000 &&
+      changedLamp[0].temperature < 6500
+    ) {
+      temperatureIndex = 4;
+    } else if (changedLamp[0].temperature >= 6500) {
+      temperatureIndex = 5;
+    }
+
+    temperature[temperatureIndex].warm;
+
     if (changedLamp[0].status === "on") {
-      shell.exec("/home/pi/Documents/mbs.sh 8 4098 65150");
+      shell.exec(
+        `/home/pi/Documents/mbs.sh 8 4098 ${temperature[temperatureIndex].warm} ${temperature[temperatureIndex].cold}`
+      );
     } else {
       shell.exec("/home/pi/Documents/mbs.sh 8 4098 65024");
     }
