@@ -35,8 +35,8 @@ const temperature = [
   { warm: 766, cold: 1024 }, // 2700
   { warm: 762, cold: 1144 }, // 3000
   { warm: 722, cold: 1214 }, // 3500
-  { warm: 692, cold: 1244 }, // 4000
-  { warm: 1214, cold: 692 }, // 5000
+  { warm: 692, cold: 1214 }, // 4000
+  { warm: 692, cold: 1244 }, // 5000
   { warm: 512, cold: 1278 }, // 6500
 ];
 
