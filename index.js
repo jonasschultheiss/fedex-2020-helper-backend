@@ -33,10 +33,10 @@ const db = [
 
 const temperature = [
   { warm: 766, cold: 1024 }, // 2700
-  { warm: 762, cold: 1144 }, // 3000
-  { warm: 722, cold: 1214 }, // 3500
-  { warm: 692, cold: 1214 }, // 4000
-  { warm: 692, cold: 1244 }, // 5000
+  { warm: 763, cold: 1186 }, // 3000
+  { warm: 756, cold: 1225 }, // 3500
+  { warm: 747, cold: 1244 }, // 4000
+  { warm: 728, cold: 1262 }, // 5000
   { warm: 512, cold: 1278 }, // 6500
 ];
 
