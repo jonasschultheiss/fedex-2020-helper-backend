@@ -98,12 +98,12 @@ app.put("/lamps/:iNumber", async (req, res) => {
 
     const batchpathwrite = "/home/pi/Documents/mbs.sh";
     if (changedLamp[0].status === "on") {
-      exec(`${batchpathwrite} 8 8224 0xA 0xA`);
+      exec(`${batchpathwrite} 8 8225 10 10`);
       exec(
         `${batchpathwrite} 8 4098 ${temperature[temperatureIndex].warm} ${temperature[temperatureIndex].cold}`
       );
     } else {
-      exec(`${batchpathwrite} 8 8224 0xC 0xC`);
+      exec(`${batchpathwrite} 8 8225 12 12`);
       // exec("${batchpathwrite} 8 4098 65024");
     }
 
