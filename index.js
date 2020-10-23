@@ -117,7 +117,9 @@ app.put("/lamps/:iNumber", async (req, res) => {
       statusLamp = changedLamp[0].status;
     }
 
-    console.log("temperatureIndex: " + temperatureIndex);
+    console.log(
+      "statusLamp: " + statusLamp + " temperatureIndex: " + temperatureIndex
+    );
     if (statusLamp === "on") {
       exec(`${batchpathwrite} 8 4098 ${temperature[temperatureIndex].warm}`);
       setTimeout(() => {}, 50);
