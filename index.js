@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const cors = require("cors");
-const shell = require("shelljs");
+const { exec } = require("child_process");
 
 const app = express();
 
@@ -96,14 +96,15 @@ app.put("/lamps/:iNumber", async (req, res) => {
       temperatureIndex = 5;
     }
 
-    temperature[temperatureIndex].warm;
-
+    const batchpathwrite = "/home/pi/Documents/mbs.sh";
     if (changedLamp[0].status === "on") {
-      shell.exec(
-        `/home/pi/Documents/mbs.sh 8 4098 ${temperature[temperatureIndex].warm} ${temperature[temperatureIndex].cold}`
+      exec(`${batchpathwrite} 8 8224 0xA 0xA`);
+      exec(
+        `${batchpathwrite} 8 4098 ${temperature[temperatureIndex].warm} ${temperature[temperatureIndex].cold}`
       );
     } else {
-      shell.exec("/home/pi/Documents/mbs.sh 8 4098 65024");
+      exec(`${batchpathwrite} 8 8224 0xC 0xC`);
+      // exec("${batchpathwrite} 8 4098 65024");
     }
 
     res.json(changed);
