@@ -100,7 +100,12 @@ app.put("/lamps/:iNumber", async (req, res) => {
 
     const batchpathwrite = "/home/pi/Documents/mbs.sh";
 
-    console.log(statusLamp);
+    console.log(
+      "statusLamp: " +
+        statusLamp +
+        " changedLamp[0].status: " +
+        changedLamp[0].status
+    );
     if (statusLamp !== changedLamp[0].status) {
       if (changedLamp[0].status === "on") {
         exec(`${batchpathwrite} 8 8225 10`);
@@ -112,7 +117,7 @@ app.put("/lamps/:iNumber", async (req, res) => {
       statusLamp = changedLamp[0].status;
     }
 
-    console.log(temperatureIndex);
+    console.log("temperatureIndex: " + temperatureIndex);
     if (changedLamp[0].status === "on") {
       exec(`${batchpathwrite} 8 4098 ${temperature[temperatureIndex].warm}`);
       setTimeout(() => {}, 50);
