@@ -102,19 +102,18 @@ app.put("/lamps/:iNumber", async (req, res) => {
 
     if (statusLamp !== changedLamp[0].status) {
       if (changedLamp[0].status === "on") {
-        exec(`${batchpathwrite} 8 8225 10 10`);
+        exec(`${batchpathwrite} 8 8225 10`);
         setTimeout(() => {}, 500);
       } else {
-        exec(`${batchpathwrite} 8 8225 12 12`);
+        exec(`${batchpathwrite} 8 8225 12`);
       }
 
       statusLamp = changedLamp[0].status;
     }
 
     if (changedLamp[0].status === "on") {
-      exec(
-        `${batchpathwrite} 8 4098 ${temperature[temperatureIndex].warm} ${temperature[temperatureIndex].cold}`
-      );
+      exec(`${batchpathwrite} 8 4096 ${temperature[temperatureIndex].warm}`);
+      exec(`${batchpathwrite} 8 4096 ${temperature[temperatureIndex].cold}`);
     }
 
     res.json(changed);
