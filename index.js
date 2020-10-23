@@ -40,6 +40,8 @@ const temperature = [
   { warm: 512, cold: 1278 }, // 6500
 ];
 
+global.statusLamp = "off";
+
 const jsonParser = bodyparser.json();
 app.use(jsonParser);
 
@@ -97,13 +99,23 @@ app.put("/lamps/:iNumber", async (req, res) => {
     }
 
     const batchpathwrite = "/home/pi/Documents/mbs.sh";
+
+    if (statusLamp !== changedLamp[0].status) {
+      if (changedLamp[0].status === "on") {
+        exec(`${batchpathwrite} 8 8225 10 10`);
+        setTimeout(() => {}, 100);
+      } else {
+        exec(`${batchpathwrite} 8 8225 12 12`);
+      }
+
+      statusLamp = changedLamp[0].status;
+    }
+
     if (changedLamp[0].status === "on") {
-      exec(`${batchpathwrite} 8 8225 10 10`);
       exec(
         `${batchpathwrite} 8 4098 ${temperature[temperatureIndex].warm} ${temperature[temperatureIndex].cold}`
       );
     } else {
-      exec(`${batchpathwrite} 8 8225 12 12`);
       // exec("${batchpathwrite} 8 4098 65024");
     }
 
