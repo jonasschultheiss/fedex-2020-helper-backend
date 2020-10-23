@@ -103,7 +103,7 @@ app.put("/lamps/:iNumber", async (req, res) => {
     if (statusLamp !== changedLamp[0].status) {
       if (changedLamp[0].status === "on") {
         exec(`${batchpathwrite} 8 8225 10 10`);
-        setTimeout(() => {}, 100);
+        setTimeout(() => {}, 250);
       } else {
         exec(`${batchpathwrite} 8 8225 12 12`);
       }
